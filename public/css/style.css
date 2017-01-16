@@ -1,0 +1,55 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #555555;
+    color: white;
+    text-transform: uppercase;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+.button {
+    border: none;
+    color: white;
+    display: inline-block;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.erase, .confirm {
+    background-color: #f44336;
+}
+
+.update, .insert {
+    background-color: #4CAF50;
+}
+
+footer {
+    background-color: #555555;
+    color: white;
+    min-height: 100%;
+}
+
+.author-credits {
+    font-family: Helvetica;
+    font-weight: bolder;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.id, .nombres, .apellidos, .cedula, .correo, .telefono, .operaciones, {
+    width: 25px;
+}

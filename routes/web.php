@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'PersonaController@index')->name('index');
+
+Route::resource('persona', 'PersonaController', ['except' => ['index'] ]);
+
+Route::group(['prefix' => 'verify'], function () {
+    Route::post('cedula', 'PersonaController@existCedula')->name('persona.cedula');
+    Route::post('email', 'PersonaController@existEmail')->name('persona.email');
 });
