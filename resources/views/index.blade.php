@@ -15,9 +15,31 @@
 
   @section('body')
     {{-- <h1>{{ $titulo }}</h1> --}}
-
     <section class="forms">
-      @include('form-insert')
+      <table>
+        <thead>
+          <tr>
+            <th class="id">id</th>
+            <th class="nombres">nombres</th>
+            <th class="apellidos">apellidos</th>
+            <th class="cedula">cédula</th>
+            <th class="correo">correo</th>
+            <th class="telefono">telefono</th>
+            <th class="operaciones">operaciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="wrapperForms">
+            @include('form-insert')
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="formsValidity" style="display:hidden;">
+      <input type="hidden" name="validezCedula" value="false">
+      <input type="hidden" name="validezCorreo" value="false">
+      <input type="hidden" name="validezTelefono" value="false">
     </section>
 
     @if (count($personas) > 0)
@@ -32,6 +54,6 @@
   @endsection {{-- additional-footer --}}
 
   @section('custom-js')
-    <script src="{{ asset('/js/miniproyecto.js') }}"></script>
+    <script src="{{ asset('/js/crud-list.js') }}"></script>
     {{-- @include('scripts') --}}
   @endsection {{-- custom-js --}}

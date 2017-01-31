@@ -28,7 +28,7 @@ class PersonaController extends Controller
   public function index(Request $request)
   {
       $titulo = 'Laravel '.App::version();
-      $personas = $this->personas->latest('created_at')->paginate(5);
+      $personas = $this->personas->latest('created_at')->paginate(4);
 
       if ($request->ajax()) {
           return view('list', ['personas' => $personas])->render();

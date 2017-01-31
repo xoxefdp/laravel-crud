@@ -3,9 +3,10 @@ var campoApellidos = $("input[name='apellidos']");
 var campoCedula = $("input[name='cedula']");
 var campoCorreo = $("input[name='correo']");
 var campoTelefono = $("input[name='telefono']");
-
-var buttonInsert = $("button[name='insert']");
-var buttonUpdate = $("button[name='update']");
+var buttonInsert = $("button[name='confirmInsert']");
+var validezCedula = $("input[name='validezCedula']");
+var validezCorreo = $("input[name='validezCorreo']");
+var validezTelefono = $("input[name='validezTelefono']");
 
 $.ajaxSetup({
   headers: {
@@ -13,38 +14,49 @@ $.ajaxSetup({
   }
 });
 
-$(function() {
-  $('body').on('click', '.pagination a', function(e) {
-    e.preventDefault();
-    var url = $(this).attr('href');
-    getPersonas(url);
-    window.history.pushState("", "", url);
-  });
+$('body').on('click', '.pagination a', function(e) {
+  e.preventDefault();
+  var url = $(this).attr('href');
+  getPersonas(url);
+  window.history.pushState("", "", url);
+});
 
-  campoCedula.on('keyup', function() {
-    if ( validateNumericFormat( campoCedula.val() ) ) {
-      verifyCedula( campoCedula.val() );
-    }
-  });
+$('.forms').on('keyup', '.wrapperForms',function() {
 
-  campoCorreo.on('keyup', function() {
-    if ( validateEmailFormat( campoCorreo.val() ) ) {
-      verifyEmail( campoCorreo.val() );
-    }
-  });
+  if ( validateNumericFormat( campoCedula.val() ) ) {
+    verifyCedula( campoCedula.val() );
+    console.log('validateNumericFormat true');
+  } else {
+    validezCedula.val('false');
+    console.log('validateNumericFormat false');
+  }
 
-  campoTelefono.on('keyup', function() {
-    if ( validateNumericDashFormat( campoTelefono.val() ) ) {
-      console.log('valid');
-      buttonInsert.prop("disabled", false);
-      // buttonUpdate.prop("disabled", false);
-    } else {
-      console.log('not valid');
-      buttonInsert.prop("disabled", true);
-      // buttonUpdate.prop("disabled", true);
-    }
-  });
+  if ( validateEmailFormat( campoCorreo.val() ) ) {
+    verifyEmail( campoCorreo.val() );
+    console.log('validateEmailFormat true');
+  } else {
+    validezCorreo.val('false');
+    console.log('validateEmailFormat false');
+  }
 
+  if ( validateNumericDashFormat( campoTelefono.val() ) ) {
+    validezTelefono.val('true');
+    console.log('validateNumericDashFormat true');
+  } else {
+    validezTelefono.val('false');
+    console.log('validateNumericDashFormat false');
+  }
+
+});
+
+validezCedula.change( function(){
+  console.log('validezCedula change');
+});
+validezCorreo.change( function(){
+  console.log('validezCorreo change');
+});
+validezTelefono.change( function(){
+  console.log('validezTelefono change');
 });
 
 function getPersonas(url) {
@@ -72,33 +84,6 @@ function validateNumericDashFormat(numberDash) {
   return numericDashRegex.test(numberDash);
 }
 
-function verifyEmail(email) {
-  $.ajax({
-    data: {
-      correo: email
-    },
-    dataType: 'JSON',
-    method: 'POST',
-    url: 'verify/email'
-  }).done(function( data, textStatus, jqXHR ) {
-    var response = $.parseJSON(data);
-    if ( response ) {
-      console.log(response);
-      console.log('existe');
-      buttonInsert.prop("disabled", true);
-      // buttonUpdate.prop("disabled", true);
-    } else {
-      console.log(response);
-      console.log('no existe');
-      buttonInsert.prop("disabled", false);
-      // buttonUpdate.prop("disabled", false);
-    }
-    console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
-  }).fail(function( jqXHR, textStatus, errorThrown ) {
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
-  });
-}
-
 function verifyCedula(id) {
   $.ajax({
     data: {
@@ -108,15 +93,30 @@ function verifyCedula(id) {
     method: 'POST',
     url: 'verify/cedula'
   }).done(function( data, textStatus, jqXHR ) {
-    var response = $.parseJSON(data);
-    if ( response ) {
-      console.log('existe');
-      buttonInsert.prop("disabled", true);
-      // buttonUpdate.prop("disabled", true);
+    if ( $.parseJSON(data) ) {
+      validezCedula.val('false');
     } else {
-      console.log('no existe');
-      buttonInsert.prop("disabled", false);
-      // buttonUpdate.prop("disabled", false);
+      validezCedula.val('true');
+    }
+    console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+  }).fail(function( jqXHR, textStatus, errorThrown ) {
+    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+  });
+}
+
+function verifyEmail(email) {
+  $.ajax({
+    data: {
+      correo: email
+    },
+    dataType: 'JSON',
+    method: 'POST',
+    url: 'verify/email'
+  }).done(function( data, textStatus, jqXHR ) {
+    if ( $.parseJSON(data) ) {
+      validezCorreo.val('false');
+    } else {
+      validezCorreo.val('true');
     }
     console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
   }).fail(function( jqXHR, textStatus, errorThrown ) {
@@ -129,7 +129,7 @@ function showInsert() {
     method: 'GET',
     url : 'persona/create'
   }).done(function( data, textStatus, jqXHR ) {
-    $('.forms').html(data);
+    $('.wrapperForms').html(data);
     // console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
@@ -142,7 +142,7 @@ function showUpdate(id) {
     method: 'GET',
     url : 'persona/'+id+'/edit'
   }).done(function( data, textStatus, jqXHR ) {
-    $('.forms').html(data);
+    $('.wrapperForms').html(data);
     // console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
@@ -155,7 +155,7 @@ function showErase(id) {
     method: 'GET',
     url : 'persona/'+id
   }).done(function( data, textStatus, jqXHR ) {
-    $('.forms').html(data);
+    $('.wrapperForms').html(data);
     // console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
@@ -164,16 +164,8 @@ function showErase(id) {
 }
 
 function toInsert() {
-  var token = $('input[name=_token]').val();
-  var campoNombres = $("input[name='nombres']");
-  var campoApellidos = $("input[name='apellidos']");
-  var campoCedula = $("input[name='cedula']");
-  var campoCorreo = $("input[name='correo']");
-  var campoTelefono = $("input[name='telefono']");
-
   $.ajax({
     data: {
-      '_token': token,
       'nombres': campoNombres.val(),
       'apellidos': campoApellidos.val(),
       'cedula': campoCedula.val(),
@@ -194,16 +186,8 @@ function toInsert() {
 }
 
 function toUpdate(id) {
-  var token = $('input[name=_token]').val();
-  var campoNombres = $("input[name='nombres']");
-  var campoApellidos = $("input[name='apellidos']");
-  var campoCedula = $("input[name='cedula']");
-  var campoCorreo = $("input[name='correo']");
-  var campoTelefono = $("input[name='telefono']");
-
   $.ajax({
     data: {
-      '_token': token,
       'nombres': campoNombres.val(),
       'apellidos': campoApellidos.val(),
       'cedula': campoCedula.val(),
