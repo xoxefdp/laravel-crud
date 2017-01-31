@@ -3,7 +3,9 @@ var campoApellidos = $("input[name='apellidos']");
 var campoCedula = $("input[name='cedula']");
 var campoCorreo = $("input[name='correo']");
 var campoTelefono = $("input[name='telefono']");
+
 var buttonInsert = $("button[name='confirmInsert']");
+
 var validezCedula = $("input[name='validezCedula']");
 var validezCorreo = $("input[name='validezCorreo']");
 var validezTelefono = $("input[name='validezTelefono']");
@@ -22,7 +24,6 @@ $('body').on('click', '.pagination a', function(e) {
 });
 
 $('.forms').on('keyup', '.wrapperForms',function() {
-
   if ( validateNumericFormat( campoCedula.val() ) ) {
     verifyCedula( campoCedula.val() );
     console.log('validateNumericFormat true');
@@ -46,7 +47,6 @@ $('.forms').on('keyup', '.wrapperForms',function() {
     validezTelefono.val('false');
     console.log('validateNumericDashFormat false');
   }
-
 });
 
 validezCedula.change( function(){

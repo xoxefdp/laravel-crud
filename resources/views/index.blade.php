@@ -36,7 +36,7 @@
       </table>
     </section>
 
-    <section class="formsValidity" style="display:hidden;">
+    <section>
       <input type="hidden" name="validezCedula" value="false">
       <input type="hidden" name="validezCorreo" value="false">
       <input type="hidden" name="validezTelefono" value="false">
