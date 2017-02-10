@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   @yield('custom-meta')
   @yield('custom-title')
   <!--[if lt IE 9]>
@@ -22,7 +22,7 @@
 <body>
   @yield('body')
   <footer>
-    <p class="author-credits">Desarrollado por <a href="https://co.linkedin.com/in/josefranciscodiazperez">José Diaz</a></p>
+    <p class="author-credits">Desarrollado por <a href="https://co.linkedin.com/in/josefranciscodiazperez" target="_blank">José Diaz</a></p>
     @yield('additional-footer')
   </footer>
   <script src="{{ asset('/assets/jquery/dist/jquery.min.js') }}"></script>
