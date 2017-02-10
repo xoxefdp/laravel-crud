@@ -164,6 +164,11 @@ function showErase(id) {
 }
 
 function toInsert() {
+  var campoNombres = $("input[name='nombres']");
+  var campoApellidos = $("input[name='apellidos']");
+  var campoCedula = $("input[name='cedula']");
+  var campoCorreo = $("input[name='correo']");
+  var campoTelefono = $("input[name='telefono']");
   $.ajax({
     data: {
       'nombres': campoNombres.val(),
@@ -186,6 +191,11 @@ function toInsert() {
 }
 
 function toUpdate(id) {
+  var campoNombres = $("input[name='nombres']");
+  var campoApellidos = $("input[name='apellidos']");
+  var campoCedula = $("input[name='cedula']");
+  var campoCorreo = $("input[name='correo']");
+  var campoTelefono = $("input[name='telefono']");
   $.ajax({
     data: {
       'nombres': campoNombres.val(),
