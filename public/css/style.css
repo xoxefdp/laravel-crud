@@ -32,9 +32,17 @@ tr:nth-child(even){
 .erase, .confirm {
     background-color: #f44336;
 }
+.erase:hover, .confirm:hover {
+    color: white;
+    background-color: #440000;
+}
 
 .update, .insert {
     background-color: #4CAF50;
+}
+.update:hover, .insert:hover {
+    color: white;
+    background-color: #004400;
 }
 
 footer {
