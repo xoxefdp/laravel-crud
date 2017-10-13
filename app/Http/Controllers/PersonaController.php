@@ -119,8 +119,8 @@ class PersonaController extends Controller
         $this->validate($request, [
             'nombres' => 'required|regex:/^[a-zA-Z. ]*$/',
             'apellidos' => 'required|regex:/^[a-zA-Z. ]*$/',
-            'cedula' => 'required|numeric',
-            'correo' => 'required|email',
+            'cedula' => 'required|numeric|exists:persona,cedula',
+            'correo' => 'required|email|exists:persona,correo',
             'telefono' => 'required|regex:/^[0-9 ]+$/'
         ]);
 
