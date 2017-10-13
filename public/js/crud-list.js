@@ -235,8 +235,6 @@ function toInsert() {
 }
 
 function toUpdate(id) {
-  var id = id;
-
   var campoNombres = $("input[name='nombres']");
   var campoApellidos = $("input[name='apellidos']");
   var campoCedula = $("input[name='cedula']");
@@ -255,7 +253,7 @@ function toUpdate(id) {
     url : 'persona/'+id
   }).done(function( data, textStatus, jqXHR ) {
     $("tr[listitem='"+data.id+"']").html('<td>'+data.id+'</td><td>'+data.nombres+'</td><td>'+data.apellidos+'</td><td>'+data.cedula+'</td><td>'+data.correo+'</td><td>'+data.telefono+'</td><td><div class="btn-group" role="group"><button type="button" name="erase" class="btn button erase" onclick="showErase( '+data.id+' )">eliminar</button><button type="button" name="update" class="btn button update" onclick="showUpdate( '+data.id+' )">modificar</button></div></td>');
-    showUpdate(id);
+    showInsert();
     // console.log(data);
     // console.log(textStatus);
     // console.log(jqXHR);
@@ -269,15 +267,13 @@ function toUpdate(id) {
 }
 
 function toErase(id) {
-  var id = id;
-
   $.ajax({
     dataType: 'JSON',
     method: 'DELETE',
     url : 'persona/'+id
   }).done(function( data, textStatus, jqXHR ) {
     $("tr[listitem='"+data.id+"']").remove();
-    showErase(id);
+    showInsert();
     // console.log(data);
     // console.log(textStatus);
     // console.log(jqXHR);
