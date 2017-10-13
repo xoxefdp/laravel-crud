@@ -23,49 +23,63 @@ $('body').on('click', '.pagination a', function(e) {
   window.history.pushState("", "", url);
 });
 
-$('.forms').on('keyup', '.wrapperForms',function() {
+campoCedula.on('keyup', function() {
   if ( validateNumericFormat( campoCedula.val() ) ) {
     verifyCedula( campoCedula.val() );
-    console.log('validateNumericFormat true');
+    // console.log('validateNumericFormat true');
   } else {
     validezCedula.val('false');
-    console.log('validateNumericFormat false');
+    // console.log('validateNumericFormat false');
   }
+});
 
+campoCorreo.on('keyup', function() {
   if ( validateEmailFormat( campoCorreo.val() ) ) {
     verifyEmail( campoCorreo.val() );
-    console.log('validateEmailFormat true');
+    // console.log('validateEmailFormat true');
   } else {
     validezCorreo.val('false');
-    console.log('validateEmailFormat false');
+    // console.log('validateEmailFormat false');
   }
+});
 
+campoTelefono.on('keyup', function() {
   if ( validateNumericDashFormat( campoTelefono.val() ) ) {
     validezTelefono.val('true');
-    console.log('validateNumericDashFormat true');
+    // console.log('validateNumericDashFormat true');
   } else {
     validezTelefono.val('false');
-    console.log('validateNumericDashFormat false');
+    // console.log('validateNumericDashFormat false');
   }
 });
 
+
 validezCedula.change( function(){
-  console.log('validezCedula change');
+  // console.log('validezCedula change');
 });
 validezCorreo.change( function(){
-  console.log('validezCorreo change');
+  // console.log('validezCorreo change');
 });
 validezTelefono.change( function(){
-  console.log('validezTelefono change');
+  // console.log('validezTelefono change');
 });
 
 function getPersonas(url) {
   $.ajax({
     url : url
-  }).done(function(data) {
+  }).done(function( data, textStatus, jqXHR ) {
     $('.list').html(data);
-  }).fail(function(){
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
+    stylePagination();
+
+  }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga de personas.');
+    console.log(jqXHR);
+    console.log(textStatus);
+    console.log(errorThrown);
   });
 }
 
@@ -98,9 +112,14 @@ function verifyCedula(id) {
     } else {
       validezCedula.val('true');
     }
-    console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    // console.log(jqXHR);
+    // console.log(textStatus);
+    // console.log(errorThrown);
   });
 }
 
@@ -118,9 +137,14 @@ function verifyEmail(email) {
     } else {
       validezCorreo.val('true');
     }
-    console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    // console.log(jqXHR);
+    // console.log(textStatus);
+    // console.log(errorThrown);
   });
 }
 
@@ -130,10 +154,15 @@ function showInsert() {
     url : 'persona/create'
   }).done(function( data, textStatus, jqXHR ) {
     $('.wrapperForms').html(data);
-    // console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    console.log(jqXHR);
+    console.log(textStatus);
+    console.log(errorThrown);
   });
 }
 
@@ -143,10 +172,15 @@ function showUpdate(id) {
     url : 'persona/'+id+'/edit'
   }).done(function( data, textStatus, jqXHR ) {
     $('.wrapperForms').html(data);
-    // console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    console.log(jqXHR);
+    console.log(textStatus);
+    console.log(errorThrown);
   });
 }
 
@@ -156,10 +190,15 @@ function showErase(id) {
     url : 'persona/'+id
   }).done(function( data, textStatus, jqXHR ) {
     $('.wrapperForms').html(data);
-    // console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    console.log(jqXHR);
+    console.log(textStatus);
+    console.log(errorThrown);
   });
 }
 
@@ -183,14 +222,21 @@ function toInsert() {
   }).done(function( data, textStatus, jqXHR ) {
     $('tbody').append('<tr listitem="'+data.id+'"><td>'+data.id+'</td><td>'+data.nombres+'</td><td>'+data.apellidos+'</td><td>'+data.cedula+'</td><td>'+data.correo+'</td><td>'+data.telefono+'</td><td><div class="btn-group" role="group"><button type="button" name="erase" class="btn button erase" onclick="showErase( '+data.id+' )">eliminar</button><button type="button" name="update" class="btn button update" onclick="showUpdate( '+data.id+' )">modificar</button></div></td></tr>');
     showInsert();
-    console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    console.log(jqXHR);
+    console.log(textStatus);
+    console.log(errorThrown);
   });
 }
 
 function toUpdate(id) {
+  var id = id;
+
   var campoNombres = $("input[name='nombres']");
   var campoApellidos = $("input[name='apellidos']");
   var campoCedula = $("input[name='cedula']");
@@ -209,25 +255,46 @@ function toUpdate(id) {
     url : 'persona/'+id
   }).done(function( data, textStatus, jqXHR ) {
     $("tr[listitem='"+data.id+"']").html('<td>'+data.id+'</td><td>'+data.nombres+'</td><td>'+data.apellidos+'</td><td>'+data.cedula+'</td><td>'+data.correo+'</td><td>'+data.telefono+'</td><td><div class="btn-group" role="group"><button type="button" name="erase" class="btn button erase" onclick="showErase( '+data.id+' )">eliminar</button><button type="button" name="update" class="btn button update" onclick="showUpdate( '+data.id+' )">modificar</button></div></td>');
-    showInsert();
-    console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    showUpdate(id);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    console.log(jqXHR);
+    console.log(textStatus);
+    console.log(errorThrown);
   });
 }
 
 function toErase(id) {
+  var id = id;
+
   $.ajax({
     dataType: 'JSON',
     method: 'DELETE',
     url : 'persona/'+id
   }).done(function( data, textStatus, jqXHR ) {
     $("tr[listitem='"+data.id+"']").remove();
-    showInsert();
-    console.log( 'data: '+data+' textStatus: '+textStatus+' jqXHR: '+jqXHR);
+    showErase(id);
+    // console.log(data);
+    // console.log(textStatus);
+    // console.log(jqXHR);
+
   }).fail(function( jqXHR, textStatus, errorThrown ) {
     alert('Hubo un problema con la carga del formulario.');
-    console.log( 'jqXHR: '+jqXHR+' textStatus: '+textStatus+' errorThrown: '+errorThrown);
+    console.log(jqXHR);
+    console.log(textStatus);
+    console.log(errorThrown);
   });
 }
+
+function stylePagination() {
+  $('.list .container nav').children().children().addClass('page-item');
+  $('.list .container nav').children().children().children().addClass('page-link');
+}
+
+$(window).on('load', function(){
+  stylePagination();
+});

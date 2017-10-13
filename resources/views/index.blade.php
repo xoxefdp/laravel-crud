@@ -16,8 +16,8 @@
   @section('body')
     {{-- <h1>{{ $titulo }}</h1> --}}
     <section class="forms">
-      <table>
-        <thead>
+      <table class="table table-bordered table-striped table-hover table-responsive">
+        <thead class="thead-inverse">
           <tr>
             <th class="id">id</th>
             <th class="nombres">nombres</th>

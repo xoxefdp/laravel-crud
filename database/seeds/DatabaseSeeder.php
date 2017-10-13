@@ -12,6 +12,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $personas = factory(App\Persona::class, 10)->make(); // instancia
-        $personas = factory(App\Persona::class, 30)->create(); // persiste
+        $personas = factory(App\Persona::class, 5000)->create(); // persiste
     }
 }

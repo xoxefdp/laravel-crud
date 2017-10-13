@@ -16,6 +16,7 @@
         comment inside the CC or it will close prematurely. */
     </style>
   <![endif]-->
+  <link rel="stylesheet" href="{{ asset('/assets/tether/dist/css/tether.min.css') }}" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="{{ asset('/assets/bootstrap/dist/css/bootstrap.min.css') }}" media="screen" title="no title" charset="utf-8">
   @yield('custom-css')
 </head>
@@ -26,6 +27,7 @@
     @yield('additional-footer')
   </footer>
   <script src="{{ asset('/assets/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('/assets/tether/dist/js/tether.min.js') }}"></script>
   <script src="{{ asset('/assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   @yield('custom-js')
 </body>

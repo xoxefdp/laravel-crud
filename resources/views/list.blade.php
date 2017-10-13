@@ -18,8 +18,8 @@
   }
 
 @endphp
-<table>
-  <thead>
+<table class="table table-bordered table-striped table-hover table-responsive">
+  <thead class="thead-inverse">
     <tr>
       <th class="id">id</th>
       <th class="nombres">nombres</th>
@@ -33,12 +33,12 @@
   <tbody>
   @foreach ($personas as $persona)
     <tr listitem="{{ $persona->id }}">
-      <td class="id">@php echo stringLimiter($persona->id, 15); @endphp</td>
-      <td class="nombres">@php echo stringLimiter($persona->nombres, 15); @endphp</td>
-      <td class="apellidos">@php echo stringLimiter($persona->apellidos, 15); @endphp</td>
-      <td class="cedula">@php echo stringLimiter($persona->cedula, 15); @endphp</td>
-      <td class="correo">@php echo stringLimiter($persona->correo, 15); @endphp</td>
-      <td class="telefono">@php echo stringLimiter($persona->telefono, 15); @endphp</td>
+      <td class="id">@php echo stringLimiter($persona->id, 11); @endphp</td>
+      <td class="nombres">@php echo stringLimiter($persona->nombres, 11); @endphp</td>
+      <td class="apellidos">@php echo stringLimiter($persona->apellidos, 11); @endphp</td>
+      <td class="cedula">@php echo stringLimiter($persona->cedula, 11); @endphp</td>
+      <td class="correo">@php echo stringLimiter($persona->correo, 11); @endphp</td>
+      <td class="telefono">@php echo stringLimiter($persona->telefono, 11); @endphp</td>
       <td class="operaciones">
         <div class="btn-group" role="group">
           <button type="button" name="erase" class="btn button erase" onclick="showErase( {{ $persona->id }} )">eliminar</button>
@@ -50,7 +50,7 @@
   </tbody>
 </table>
 <div class="container">
-  <div class="text-center">
+  <nav aria-label="">
     {{ $personas->links() }}
-  </div>
+  </nav>
 </div>
