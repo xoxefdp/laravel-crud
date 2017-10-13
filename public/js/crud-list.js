@@ -29,7 +29,7 @@ campoCedula.on('keyup', function() {
     // console.log('validateNumericFormat true');
   } else {
     validezCedula.val('false');
-    // console.log('validateNumericFormat false');
+    console.log('validateNumericFormat false');
   }
 });
 
@@ -39,7 +39,7 @@ campoCorreo.on('keyup', function() {
     // console.log('validateEmailFormat true');
   } else {
     validezCorreo.val('false');
-    // console.log('validateEmailFormat false');
+    console.log('validateEmailFormat false');
   }
 });
 
@@ -49,7 +49,7 @@ campoTelefono.on('keyup', function() {
     // console.log('validateNumericDashFormat true');
   } else {
     validezTelefono.val('false');
-    // console.log('validateNumericDashFormat false');
+    console.log('validateNumericDashFormat false');
   }
 });
 
@@ -109,8 +109,10 @@ function verifyCedula(id) {
   }).done(function( data, textStatus, jqXHR ) {
     if ( $.parseJSON(data) ) {
       validezCedula.val('false');
+      console.log('verifyCedula false');
     } else {
       validezCedula.val('true');
+      console.log('verifyCedula true');
     }
     // console.log(data);
     // console.log(textStatus);
@@ -134,8 +136,10 @@ function verifyEmail(email) {
   }).done(function( data, textStatus, jqXHR ) {
     if ( $.parseJSON(data) ) {
       validezCorreo.val('false');
+      console.log('verifyEmail false');
     } else {
       validezCorreo.val('true');
+      console.log('verifyEmail true');
     }
     // console.log(data);
     // console.log(textStatus);
