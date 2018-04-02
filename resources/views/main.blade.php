@@ -23,7 +23,7 @@
 <body>
   @yield('body')
   <footer>
-    <p class="author-credits">Desarrollado por <a href="https://co.linkedin.com/in/josefranciscodiazperez" target="_blank">José Diaz</a></p>
+    <p class="author-credits">Desarrollado por <a href="https://www.linkedin.com/in/josefranciscodiazperez" target="_blank">José Diaz</a></p>
     @yield('additional-footer')
   </footer>
   <script src="{{ asset('/assets/jquery/dist/jquery.min.js') }}"></script>
